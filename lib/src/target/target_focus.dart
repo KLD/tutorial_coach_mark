@@ -15,6 +15,7 @@ class TargetFocus {
     this.color,
     this.enableOverlayTab = false,
     this.enableTargetTab = true,
+    this.enableLongPress = false,
     this.alignSkip,
     this.paddingFocus,
     this.focusAnimationDuration,
@@ -31,6 +32,7 @@ class TargetFocus {
   final BorderSide? borderSide;
   final bool enableOverlayTab;
   final bool enableTargetTab;
+  final bool enableLongPress;
   final Color? color;
   final AlignmentGeometry? alignSkip;
   final double? paddingFocus;

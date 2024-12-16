@@ -15,6 +15,7 @@ class TutorialCoachMarkWidget extends StatefulWidget {
     this.finish,
     this.paddingFocus = 10,
     this.clickTarget,
+    this.longPressTarget,
     this.onClickTargetWithTapPosition,
     this.clickOverlay,
     this.alignSkip = Alignment.bottomRight,
@@ -41,6 +42,7 @@ class TutorialCoachMarkWidget extends StatefulWidget {
 
   final List<TargetFocus> targets;
   final FutureOr Function(TargetFocus)? clickTarget;
+  final FutureOr Function(TargetFocus)? longPressTarget;
   final FutureOr Function(TargetFocus, TapDownDetails)?
       onClickTargetWithTapPosition;
   final FutureOr Function(TargetFocus)? clickOverlay;
@@ -100,6 +102,9 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
             backgroundSemanticLabel: widget.backgroundSemanticLabel,
             clickTarget: (target) {
               return widget.clickTarget?.call(target);
+            },
+            longPressTarget: (target) {
+              return widget.longPressTarget?.call(target);
             },
             clickTargetWithTapPosition: (target, tapDetails) {
               return widget.onClickTargetWithTapPosition

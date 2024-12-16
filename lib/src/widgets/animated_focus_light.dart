@@ -14,6 +14,7 @@ class AnimatedFocusLight extends StatefulWidget {
   final List<TargetFocus> targets;
   final Function(TargetFocus)? focus;
   final FutureOr Function(TargetFocus)? clickTarget;
+  final FutureOr Function(TargetFocus)? longPressTarget;
   final FutureOr Function(TargetFocus, TapDownDetails)?
       clickTargetWithTapPosition;
   final FutureOr Function(TargetFocus)? clickOverlay;
@@ -39,6 +40,7 @@ class AnimatedFocusLight extends StatefulWidget {
     this.finish,
     this.removeFocus,
     this.clickTarget,
+    this.longPressTarget,
     this.clickTargetWithTapPosition,
     this.clickOverlay,
     this.paddingFocus = 10,
@@ -136,6 +138,10 @@ abstract class AnimatedFocusLightState extends State<AnimatedFocusLight>
 
   Future _tapHandlerForPosition(TapDownDetails tapDetails) async {
     await widget.clickTargetWithTapPosition?.call(_targetFocus, tapDetails);
+  }
+
+  Future _longPressHandler() async {
+    await widget.longPressTarget?.call(_targetFocus);
   }
 
   void _runFocus() {
@@ -316,6 +322,8 @@ class AnimatedStaticFocusLightState extends AnimatedFocusLightState {
 
                         /// Essential for collecting [TapDownDetails]. Do not make [null]
                         : () {},
+                    onLongPress:
+                        _targetFocus.enableLongPress ? _longPressHandler : null,
                     child: Container(
                       color: Colors.transparent,
                       width: width,
@@ -419,6 +427,9 @@ class AnimatedPulseFocusLightState extends AnimatedFocusLightState {
                             /// Essential for collecting [TapDownDetails]. Do not make [null]
                             : () {},
                         onTapDown: _tapHandlerForPosition,
+                        onLongPress: _targetFocus.enableLongPress
+                            ? _longPressHandler
+                            : null,
                         child: Container(
                           color: Colors.transparent,
                           width: width,
