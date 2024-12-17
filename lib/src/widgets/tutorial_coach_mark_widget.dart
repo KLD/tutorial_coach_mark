@@ -90,11 +90,6 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
       type: MaterialType.transparency,
       child: Stack(
         children: <Widget>[
-          if (widget.title != null)
-            Align(
-              alignment: widget.titleAlignment,
-              child: _buildTitle(),
-            ),
           AnimatedFocusLight(
             key: _focusLightKey,
             initialFocus: widget.initialFocus,
@@ -141,6 +136,7 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
             duration: const Duration(milliseconds: 300),
             child: _buildContents(),
           ),
+          _buildTitle(),
           _buildSkip()
         ],
       ),
@@ -265,7 +261,17 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
   }
 
   Widget _buildTitle() {
-    return Text(widget.title!, style: widget.titleTextStyle);
+    if (widget.title == null) return const SizedBox.shrink();
+
+    var text = Align(
+      alignment: widget.titleAlignment,
+      child: Text(
+        widget.title!,
+        style: widget.titleTextStyle,
+      ),
+    );
+
+    return (widget.useSafeArea) ? SafeArea(child: text) : text;
   }
 
   Widget _buildSkip() {
