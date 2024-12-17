@@ -29,6 +29,9 @@ class TutorialCoachMark {
   final String textSkip;
   final TextStyle textStyleSkip;
   final bool hideSkip;
+  final String? title;
+  final TextStyle? titleTextStyle;
+  final AlignmentGeometry titleAlignment;
   final bool useSafeArea;
   final Color colorShadow;
   final double opacityShadow;
@@ -58,6 +61,9 @@ class TutorialCoachMark {
     this.alignSkip = Alignment.bottomRight,
     this.textSkip = "SKIP",
     this.textStyleSkip = const TextStyle(color: Colors.white),
+    this.title,
+    this.titleTextStyle,
+    this.titleAlignment = Alignment.topCenter,
     this.hideSkip = false,
     this.useSafeArea = true,
     this.opacityShadow = 0.8,
@@ -89,6 +95,9 @@ class TutorialCoachMark {
           textSkip: textSkip,
           textStyleSkip: textStyleSkip,
           hideSkip: hideSkip,
+          title: title,
+          titleTextStyle: titleTextStyle,
+          titleAlignment: titleAlignment,
           useSafeArea: useSafeArea,
           colorShadow: colorShadow,
           opacityShadow: opacityShadow,
