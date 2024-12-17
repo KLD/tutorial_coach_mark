@@ -314,8 +314,7 @@ class AnimatedStaticFocusLightState extends AnimatedFocusLightState {
                 Positioned(
                   left: left,
                   top: top,
-                  child: InkWell(
-                    borderRadius: _betBorderRadiusTarget(),
+                  child: GestureDetector(
                     onTapDown: _tapHandlerForPosition,
                     onTap: _targetFocus.enableTargetTab
                         ? () => _tapHandler(targetTap: true)
@@ -419,8 +418,7 @@ class AnimatedPulseFocusLightState extends AnimatedFocusLightState {
                     Positioned(
                       left: left,
                       top: top,
-                      child: InkWell(
-                        borderRadius: _betBorderRadiusTarget(),
+                      child: GestureDetector(
                         onTap: _targetFocus.enableTargetTab
                             ? () => _tapHandler(targetTap: true)
 
