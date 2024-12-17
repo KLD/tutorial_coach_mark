@@ -20,6 +20,9 @@ class TutorialCoachMarkWidget extends StatefulWidget {
     this.clickOverlay,
     this.alignSkip = Alignment.bottomRight,
     this.textSkip = "SKIP",
+    this.title,
+    this.titleTextStyle,
+    this.titleAlignment = Alignment.topCenter,
     this.onClickSkip,
     this.colorShadow = Colors.black,
     this.opacityShadow = 0.8,
@@ -52,6 +55,9 @@ class TutorialCoachMarkWidget extends StatefulWidget {
   final double paddingFocus;
   final Function()? onClickSkip;
   final AlignmentGeometry alignSkip;
+  final String? title;
+  final TextStyle? titleTextStyle;
+  final AlignmentGeometry titleAlignment;
   final String textSkip;
   final TextStyle textStyleSkip;
   final bool hideSkip;
@@ -84,6 +90,11 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
       type: MaterialType.transparency,
       child: Stack(
         children: <Widget>[
+          if (widget.title != null)
+            Align(
+              alignment: widget.titleAlignment,
+              child: _buildTitle(),
+            ),
           AnimatedFocusLight(
             key: _focusLightKey,
             initialFocus: widget.initialFocus,
@@ -251,6 +262,10 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
     return Stack(
       children: children,
     );
+  }
+
+  Widget _buildTitle() {
+    return Text(widget.title!, style: widget.titleTextStyle);
   }
 
   Widget _buildSkip() {
